@@ -54,8 +54,6 @@ class PersonControllerTest {
         }
 
         var request = Mono.just(new Person(name));
-        //when(repository.findByName(name)).thenReturn(Mono.empty());
-        //when(repository.findByName(name)).thenReturn(Mono.just(new Person(name)));
         when(repository.save(any())).thenReturn(Mono.empty());
 
         webTestClient.post()
@@ -67,7 +65,6 @@ class PersonControllerTest {
 
         verify(personService).insert(argumentCaptor.capture());
         verify(repository).findByName(name);
-        //verify(repository).save(any());
         verify(repository, Mockito.times(times)).save(any());
 
         var person = argumentCaptor.getValue();
